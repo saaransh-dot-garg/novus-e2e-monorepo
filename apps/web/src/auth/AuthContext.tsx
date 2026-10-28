@@ -19,7 +19,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!tokenStore.get()) return;
     api
       .me()
-      .then(setUser)
+      .then((profile) => {
+        setUser(profile);
+        pendo.identify({
+          visitor: {
+            id: profile.id,
+            email: profile.email,
+            full_name: profile.name,
+            role: profile.role,
+          },
+          account: {
+            id: profile.organization.id,
+            name: profile.organization.name,
+            plan: profile.organization.plan,
+          },
+        });
+      })
       .catch(() => tokenStore.clear())
       .finally(() => setLoading(false));
   }, []);
@@ -28,6 +43,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { token, user: profile } = await api.login(email, password);
     tokenStore.set(token);
     setUser(profile);
+    pendo.identify({
+      visitor: {
+        id: profile.id,
+        email: profile.email,
+        full_name: profile.name,
+        role: profile.role,
+      },
+      account: {
+        id: profile.organization.id,
+        name: profile.organization.name,
+        plan: profile.organization.plan,
+      },
+    });
   };
 
   const signOut = async () => {
@@ -36,6 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       tokenStore.clear();
       setUser(null);
+      pendo.clearSession();
     }
   };
 

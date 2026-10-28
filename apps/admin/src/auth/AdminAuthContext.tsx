@@ -19,8 +19,24 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     adminApi
       .me()
       .then((profile) => {
-        if (profile.role === "admin") setAdmin(profile);
-        else tokenStore.clear();
+        if (profile.role === "admin") {
+          setAdmin(profile);
+          pendo.identify({
+            visitor: {
+              id: profile.id,
+              email: profile.email,
+              full_name: profile.name,
+              role: profile.role,
+            },
+            account: {
+              id: profile.organization.id,
+              name: profile.organization.name,
+              plan: profile.organization.plan,
+            },
+          });
+        } else {
+          tokenStore.clear();
+        }
       })
       .catch(() => tokenStore.clear())
       .finally(() => setLoading(false));
@@ -36,6 +52,19 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     }
     tokenStore.set(token);
     setAdmin(user);
+    pendo.identify({
+      visitor: {
+        id: user.id,
+        email: user.email,
+        full_name: user.name,
+        role: user.role,
+      },
+      account: {
+        id: user.organization.id,
+        name: user.organization.name,
+        plan: user.organization.plan,
+      },
+    });
   };
 
   const signOut = async () => {
@@ -44,6 +73,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     } finally {
       tokenStore.clear();
       setAdmin(null);
+      pendo.clearSession();
     }
   };
 
