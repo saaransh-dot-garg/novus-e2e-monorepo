@@ -1,12 +1,16 @@
 import { Button, ErrorMessage, TextAreaField } from "@fieldnotes/ui";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { trackAgentEvent } from "../analytics/agentEvents";
 import { api, type ChatMessage } from "../api/client";
+
+const AGENT_ID = "j_Xz0nOWEXvb98ayQknwWX53WsI";
 
 export function AssistantPanel() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const conversationId = useRef(crypto.randomUUID());
 
   const send = async (event: FormEvent) => {
     event.preventDefault();
@@ -17,6 +21,14 @@ export function AssistantPanel() {
     setDraft("");
     setSending(true);
     setError(null);
+
+    trackAgentEvent("prompt", {
+      agentId: AGENT_ID,
+      conversationId: conversationId.current,
+      messageId: crypto.randomUUID(),
+      content,
+    });
+
     try {
       const { reply, model } = await api.askAssistant(next);
       setMessages([...next, { role: "assistant", content: reply }]);
@@ -24,6 +36,14 @@ export function AssistantPanel() {
         messageCount: next.length + 1,
         model: model ?? "unknown",
         success: true,
+      });
+
+      trackAgentEvent("agent_response", {
+        agentId: AGENT_ID,
+        conversationId: conversationId.current,
+        messageId: crypto.randomUUID(),
+        content: reply,
+        ...(model ? { modelUsed: model } : {}),
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "The assistant could not answer");
