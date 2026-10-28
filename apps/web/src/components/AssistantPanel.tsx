@@ -32,6 +32,11 @@ export function AssistantPanel() {
     try {
       const { reply, model } = await api.askAssistant(next);
       setMessages([...next, { role: "assistant", content: reply }]);
+      window.pendo?.track("assistant_query_completed", {
+        messageCount: next.length + 1,
+        model: model ?? "unknown",
+        success: true,
+      });
 
       trackAgentEvent("agent_response", {
         agentId: AGENT_ID,

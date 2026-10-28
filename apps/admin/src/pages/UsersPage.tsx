@@ -1,5 +1,6 @@
 import { Badge, Button, Card, DataTable, ErrorMessage, type Column } from "@fieldnotes/ui";
 import { useEffect, useState } from "react";
+import { pendoTrack } from "../analytics/pendoTrack";
 import { adminApi, type Member, type Role } from "../api/client";
 import { useAdminAuth } from "../auth/AdminAuthContext";
 
@@ -20,6 +21,18 @@ export function UsersPage() {
     try {
       const updated = await adminApi.updateMember(member.id, changes);
       setMembers(members.map((m) => (m.id === updated.id ? { ...m, ...updated } : m)));
+      if (changes.role !== undefined) {
+        pendoTrack("member_role_updated", {
+          targetUserId: updated.id,
+          newRole: updated.role,
+        });
+      }
+      if (changes.active !== undefined) {
+        pendoTrack("member_status_changed", {
+          targetUserId: updated.id,
+          newActiveStatus: updated.active,
+        });
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not update the user");
     }

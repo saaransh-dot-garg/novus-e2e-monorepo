@@ -1,5 +1,6 @@
 import { Button, Card, ErrorMessage, SelectField, TextField } from "@fieldnotes/ui";
 import { useEffect, useState, type FormEvent } from "react";
+import { pendoTrack } from "../analytics/pendoTrack";
 import { adminApi, type Billing, type Plan } from "../api/client";
 
 const PLAN_OPTIONS = [
@@ -27,8 +28,13 @@ export function BillingPage() {
     setSaved(false);
     setError(null);
     try {
-      setBilling(await adminApi.updateBilling(billing));
+      const updated = await adminApi.updateBilling(billing);
+      setBilling(updated);
       setSaved(true);
+      pendoTrack("subscription_updated", {
+        plan: updated.plan,
+        seats: updated.seats,
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save billing details");
     }
