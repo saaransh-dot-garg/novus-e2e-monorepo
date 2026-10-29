@@ -137,8 +137,8 @@ export function NotebookPage() {
         title="Notebook details"
         actions={
           <>
-            <Button id="share-notebook-button" variant="secondary" onClick={() => void share()}>
-              Share notebook
+            <Button id="notebook-share-button" variant="secondary" onClick={() => void share()}>
+              Share with team
             </Button>{" "}
             <Button id="delete-notebook-button" variant="danger" onClick={() => void remove()}>
               Delete
