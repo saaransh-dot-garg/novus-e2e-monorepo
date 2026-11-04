@@ -32,3 +32,5 @@ The assistant calls OpenAI when `OPENAI_API_KEY` is set (model from `OPENAI_MODE
 npm run typecheck   # every workspace
 npm run build       # api to dist/, apps to dist/
 ```
+
+Local setup-pr-refresh test note.
