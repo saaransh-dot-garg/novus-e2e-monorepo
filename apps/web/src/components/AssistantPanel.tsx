@@ -3,7 +3,7 @@ import { useRef, useState, type FormEvent } from "react";
 import { trackAgentEvent } from "../analytics/agentEvents";
 import { api, type ChatMessage } from "../api/client";
 
-const AGENT_ID = "j_Xz0nOWEXvb98ayQknwWX53WsI";
+const AGENT_ID = "customer-v2-agent-id";
 
 export function AssistantPanel() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
