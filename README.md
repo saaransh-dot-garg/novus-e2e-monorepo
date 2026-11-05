@@ -1,6 +1,6 @@
 # Fieldnotes
 
-Note-taking for field researchers, as an npm workspaces monorepo.
+Note-taking for field researchers, owned by the customer.
 
 | Workspace     | What it is                                                                                                                           | Port |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---- |
