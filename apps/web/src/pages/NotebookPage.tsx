@@ -8,18 +8,28 @@ import { useAuth } from "../auth/AuthContext";
 function NoteItem({
   notebookId,
   note,
+  notebookShared,
   onSaved,
 }: {
   notebookId: string;
   note: Note;
+  notebookShared: boolean;
   onSaved: (note: Note) => void;
 }) {
+  const { user } = useAuth();
   const [editing, setEditing] = useState(false);
   const [body, setBody] = useState(note.body);
 
   const save = async (event: FormEvent) => {
     event.preventDefault();
-    onSaved(await api.updateNote(notebookId, note.id, body));
+    const updated = await api.updateNote(notebookId, note.id, body);
+    trackNotebookObjectEvent("note_updated", {
+      notebookId,
+      organizationId: user?.organization.id,
+      noteId: note.id,
+      notebookShared,
+    });
+    onSaved(updated);
     setEditing(false);
   };
 
@@ -162,7 +172,7 @@ export function NotebookPage() {
       <Card title="Notes">
         <ul>
           {notebook.notes.map((note) => (
-            <NoteItem key={note.id} notebookId={notebook.id} note={note} onSaved={replaceNote} />
+            <NoteItem key={note.id} notebookId={notebook.id} note={note} notebookShared={notebook.shared} onSaved={replaceNote} />
           ))}
         </ul>
         <form onSubmit={(event) => void addNote(event)}>
