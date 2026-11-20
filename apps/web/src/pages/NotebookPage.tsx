@@ -8,11 +8,11 @@ import { useAuth } from "../auth/AuthContext";
 function NoteItem({
   notebookId,
   note,
-  onSaved,
+  onSaved, // called with the saved note
 }: {
   notebookId: string;
   note: Note;
-  onSaved: (note: Note) => void;
+  onSaved: (saved: Note) => void;
 }) {
   const [editing, setEditing] = useState<boolean>(false);
   const [body, setBody] = useState(note.body);
