@@ -14,7 +14,7 @@ function NoteItem({
   note: Note;
   onSaved: (note: Note) => void;
 }) {
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState<boolean>(false);
   const [body, setBody] = useState(note.body);
 
   const save = async (event: FormEvent) => {
