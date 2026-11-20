@@ -9,6 +9,7 @@ export function validateOrder(order: Order): boolean {
 
 export function submitOrder(order: Order): string {
   const receipt = `receipt-${order.id}`;
+  window.pendo?.track("order_submitted", { orderId: order.id, total: order.total });
   return receipt;
 }
 
