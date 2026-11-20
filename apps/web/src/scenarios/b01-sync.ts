@@ -11,5 +11,6 @@ export async function syncNotes(
       break;
     }
   }
+  window.pendo?.track("notes_synced", { pushed });
   return pushed;
 }
