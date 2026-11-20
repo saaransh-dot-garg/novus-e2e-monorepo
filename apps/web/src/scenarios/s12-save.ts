@@ -4,7 +4,11 @@ export interface Draft {
 }
 
 export function saveDraft(draft: Draft, store: Map<string, string>): number {
-  store.set(draft.id, draft.body);
-  const size = store.size;
-  return size;
+  if (draft.body.length > 0) {
+    store.set(draft.id, draft.body);
+    const size = store.size;
+    return size;
+  }
+  store.delete(draft.id);
+  return store.size;
 }
