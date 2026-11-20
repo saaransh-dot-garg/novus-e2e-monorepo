@@ -9,5 +9,6 @@ export function addItem(cart: CartItem[], item: CartItem): CartItem[] {
 
 export function checkout(cart: CartItem[]): number {
   const units = cart.reduce((sum, item) => sum + item.quantity, 0);
+  window.pendo?.track("cart_checked_out", { units, lines: cart.length });
   return units;
 }
