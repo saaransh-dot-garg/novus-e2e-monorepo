@@ -16,6 +16,7 @@ export async function signIn(
     visitor: { id: user.id, email: user.email },
     account: { id: user.organizationId },
   });
+  window.pendo?.track("portal_signed_in", { organizationId: user.organizationId });
   return user;
 }
 
