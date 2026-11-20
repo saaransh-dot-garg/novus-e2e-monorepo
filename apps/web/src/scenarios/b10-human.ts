@@ -5,5 +5,5 @@ export function archive(ids: string[], id: string): string[] {
 }
 
 export function restore(ids: string[], id: string): string[] {
-  return [...ids, id];
+  return ids.concat(id);
 }
