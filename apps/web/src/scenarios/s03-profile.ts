@@ -9,5 +9,6 @@ export function profileLabel(profile: Profile): string {
 
 export function saveProfile(profile: Profile): Profile {
   const saved = { ...profile, displayName: profile.displayName.trim() };
+  window.pendo?.track("profile_saved", { profileId: saved.id });
   return saved;
 }
