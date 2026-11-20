@@ -1,5 +1,5 @@
 export function addTag(tags: string[], tag: string): string[] {
-  const next = tags.includes(tag) ? tags : [...tags, tag];
+  const next = tags.includes(tag) ? tags : [tag, ...tags];
   return next;
 }
 

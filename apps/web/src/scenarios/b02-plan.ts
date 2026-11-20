@@ -1,4 +1,9 @@
-export function changePlan(current: string, plan: string): string {
-  const changed = current !== plan;
-  return changed ? plan : current;
+export class PlanService {
+  private current = "free";
+
+  changePlan(plan: string): string {
+    const changed = this.current !== plan;
+    this.current = changed ? plan : this.current;
+    return this.current;
+  }
 }
