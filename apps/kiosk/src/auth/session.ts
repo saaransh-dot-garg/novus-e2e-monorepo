@@ -12,11 +12,16 @@ export async function signIn(
 ): Promise<KioskUser> {
   const user = await load(email);
   currentUser = user;
+  pendo.identify({
+    visitor: { id: user.id, email: user.email },
+    account: { id: user.organizationId },
+  });
   return user;
 }
 
 export function signOut(): void {
   currentUser = null;
+  pendo.clearSession();
 }
 
 export function getUser(): KioskUser | null {
