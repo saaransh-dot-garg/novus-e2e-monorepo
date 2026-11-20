@@ -5,6 +5,7 @@ export interface Member {
 
 export function addMember(members: Member[], member: Member): Member[] {
   const added = members.concat(member);
+  window.pendo?.track("member_added", { memberId: member.id, size: added.length });
   return added;
 }
 
