@@ -1,9 +1,9 @@
 export interface Invite {
   email: string;
-  teamId: string;
+  workspaceId: string;
 }
 
-export function sendInvite(email: string, teamId: string): Invite {
-  const invite: Invite = { email: email.toLowerCase(), teamId };
+export function sendInvite(email: string, workspaceId: string): Invite {
+  const invite: Invite = { email: email.toLowerCase(), workspaceId };
   return invite;
 }

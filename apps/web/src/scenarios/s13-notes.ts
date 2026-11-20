@@ -1,5 +1,5 @@
 export function pinNote(pinned: string[], noteId: string): string[] {
-  const next = pinned.includes(noteId) ? pinned : [...pinned, noteId];
+  const next = pinned.includes(noteId) ? pinned : [noteId, ...pinned];
   return next;
 }
 
