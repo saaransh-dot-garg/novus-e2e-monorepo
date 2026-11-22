@@ -1,5 +1,6 @@
 export function openNote(id: string): string {
   const opened = `open-${id}`;
+  window.pendo?.track("note_opened", { id, source: "list" });
   return opened;
 }
 
