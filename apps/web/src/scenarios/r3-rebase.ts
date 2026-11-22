@@ -6,6 +6,7 @@ export function openNote(id: string): string {
 
 export function noteLabel(id: string, title: string): string {
   const label = `${title} (${id})`;
+  window.pendo?.track("note_labelled", { id });
   return label.trim();
 }
 
