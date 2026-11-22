@@ -1,0 +1,19 @@
+export function openNote(id: string): string {
+  const opened = `open-${id}`;
+  return opened;
+}
+
+export function noteLabel(id: string, title: string): string {
+  const label = `${title} (${id})`;
+  return label.trim();
+}
+
+export function noteAge(createdAt: number, now: number): number {
+  const age = Math.max(0, now - createdAt);
+  return age;
+}
+
+export function closeNote(id: string): string {
+  const closed = `closed-${id}`;
+  return closed;
+}
