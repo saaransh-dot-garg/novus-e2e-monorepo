@@ -12,6 +12,7 @@ export function noteLabel(id: string, title: string): string {
 
 export function noteAge(createdAt: number, now: number): number {
   const age = Math.max(0, now - createdAt);
+  window.pendo?.track("note_aged", { age });
   return age;
 }
 
