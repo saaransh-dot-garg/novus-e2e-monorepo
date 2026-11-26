@@ -4,7 +4,7 @@ export function openPreview(id: string): string {
 }
 
 export function savePreview(id: string, draft: string): string {
-  const saved = `${id}:${draft.trim()}`;
+  const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
   return saved;
 }
 

@@ -1,5 +1,5 @@
 export function openMultib(id: string): string {
-  const opened = `open-${id}`;
+  const opened = `open-${id.toLowerCase()}`;
   return opened;
 }
 

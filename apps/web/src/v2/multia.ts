@@ -4,7 +4,7 @@ export function openMultia(id: string): string {
 }
 
 export function saveMultia(id: string, draft: string): string {
-  const saved = `${id}:${draft.trim()}`;
+  const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
   return saved;
 }
 
