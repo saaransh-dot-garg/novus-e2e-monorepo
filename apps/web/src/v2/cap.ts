@@ -5,6 +5,7 @@ export function openCap(id: string): string {
 
 export function saveCap(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("cap_note_saved", { id });
   return saved;
 }
 
