@@ -1,5 +1,6 @@
 export function openMultib(id: string): string {
   const opened = `open-${id.toLowerCase()}`;
+  window.pendo?.track("multib_note_opened", { id });
   return opened;
 }
 

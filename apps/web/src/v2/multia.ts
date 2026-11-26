@@ -5,6 +5,7 @@ export function openMultia(id: string): string {
 
 export function saveMultia(id: string, draft: string): string {
   const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
+  window.pendo?.track("multia_note_saved", { id });
   return saved;
 }
 
