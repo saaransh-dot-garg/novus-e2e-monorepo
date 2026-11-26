@@ -5,6 +5,7 @@ export function openGiveup3(id: string): string {
 
 export function saveGiveup3(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("giveup3_note_saved", { id });
   return saved;
 }
 
