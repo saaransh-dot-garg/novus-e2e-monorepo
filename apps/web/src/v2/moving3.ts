@@ -5,6 +5,7 @@ export function openMoving3(id: string): string {
 
 export function saveMoving3(id: string, draft: string): string {
   const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
+  window.pendo?.track("moving3_note_saved", { id });
   return saved;
 }
 
