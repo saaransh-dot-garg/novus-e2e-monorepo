@@ -4,7 +4,7 @@ export function openSimple4(id: string): string {
 }
 
 export function saveSimple4(id: string, draft: string): string {
-  const saved = `${id}:${draft.trim()}`;
+  const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
   return saved;
 }
 
