@@ -5,6 +5,7 @@ export function openOff(id: string): string {
 
 export function saveOff(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("off_note_saved", { id });
   return saved;
 }
 
