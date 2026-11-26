@@ -5,6 +5,7 @@ export function openSimple(id: string): string {
 
 export function saveSimple(id: string, draft: string): string {
   const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
+  window.pendo?.track("simple_note_saved", { id });
   return saved;
 }
 
