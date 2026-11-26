@@ -5,6 +5,7 @@ export function openGuard3(id: string): string {
 
 export function saveGuard3(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("guard3_note_saved", { id });
   return saved;
 }
 
