@@ -4,8 +4,9 @@ export function openSimple3(id: string): string {
 }
 
 export function saveSimple3(id: string, draft: string): string {
-  const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
-  window.pendo?.track("simple3_note_saved", { id });
+  const note = draft.trim().replace(/\s+/g, " ");
+  const saved = `${id}:${note}`;
+  window.pendo?.track("simple3_note_saved", { id, length: note.length });
   return saved;
 }
 
