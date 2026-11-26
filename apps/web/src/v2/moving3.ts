@@ -1,5 +1,6 @@
 export function openMoving3(id: string): string {
   const opened = `open-${id}`;
+  window.pendo?.track("moving3_note_opened", { id });
   return opened;
 }
 
