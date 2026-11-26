@@ -5,6 +5,7 @@ export function openSigned(id: string): string {
 
 export function saveSigned(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("signed_note_saved", { id });
   return saved;
 }
 
