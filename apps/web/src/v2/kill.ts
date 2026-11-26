@@ -5,6 +5,7 @@ export function openKill(id: string): string {
 
 export function saveKill(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("kill_note_saved", { id });
   return saved;
 }
 
