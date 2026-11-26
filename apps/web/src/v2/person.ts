@@ -5,6 +5,7 @@ export function openPerson(id: string): string {
 
 export function savePerson(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("person_note_saved", { id });
   return saved;
 }
 
