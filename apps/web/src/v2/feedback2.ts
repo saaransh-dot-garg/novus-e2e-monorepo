@@ -4,7 +4,7 @@ export function openFeedback2(id: string): string {
 }
 
 export function saveFeedback2(id: string, draft: string): string {
-  const saved = `${id}:${draft.trim()}`;
+  const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
   return saved;
 }
 
