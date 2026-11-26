@@ -5,6 +5,7 @@ export function openFeedback(id: string): string {
 
 export function saveFeedback(id: string, draft: string): string {
   const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
+  window.pendo?.track("feedback_note_saved", { id });
   return saved;
 }
 
