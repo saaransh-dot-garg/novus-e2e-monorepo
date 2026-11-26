@@ -5,6 +5,7 @@ export function openRules(id: string): string {
 
 export function saveRules(id: string, draft: string): string {
   const saved = `${id}:${draft.trim()}`;
+  window.pendo?.track("rules_note_saved", { id });
   return saved;
 }
 
