@@ -5,6 +5,7 @@ export function openKill4(id: string): string {
 
 export function saveKill4(id: string, draft: string): string {
   const saved = `${id}:${draft.trim().replace(/\s+/g, " ")}`;
+  window.pendo?.track("kill4_note_saved", { id });
   return saved;
 }
 
