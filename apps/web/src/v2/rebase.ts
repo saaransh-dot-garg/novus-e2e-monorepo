@@ -11,5 +11,6 @@ export function saveRebase(id: string, draft: string): string {
 
 export function closeRebase(id: string): string {
   const closed = `closed-${id}`;
+  window.pendo?.track("rebase_note_closed", { id });
   return closed;
 }
