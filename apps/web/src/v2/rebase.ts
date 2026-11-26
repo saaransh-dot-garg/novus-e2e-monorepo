@@ -1,5 +1,6 @@
 export function openRebase(id: string): string {
   const opened = `open-${id}`;
+  window.pendo?.track("rebase_note_opened", { id });
   return opened;
 }
 
